@@ -1,0 +1,35 @@
+{
+  "name": "ab-football-academie",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "15.5.9",
+    "react": "^19.1.2",
+    "react-dom": "^19.1.2",
+    "typescript": "^5.6.3",
+    "@types/node": "^22.9.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "tailwindcss": "^3.4.14",
+    "postcss": "^8.4.47",
+    "autoprefixer": "^10.4.20",
+    "tailwindcss-animate": "^1.0.7",
+    "framer-motion": "^11.11.17",
+    "gsap": "^3.12.5",
+    "lenis": "^1.1.16",
+    "lucide-react": "^0.460.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-next": "15.5.9"
+  }
+}
