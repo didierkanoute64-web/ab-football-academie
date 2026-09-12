@@ -2,7 +2,7 @@ export const SITE = {
   name: "AB Football Académie",
   baseline: "Le talent, c'est le travail !",
   slogan: "Discipline · Travail · Progression · Réussite",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://ab-football.fr",
+  url:"https://ab-football.fr",
   description:
     "AB Football Académie accompagne les jeunes talents dans leur développement sportif et humain à Épinay-sur-Seine et en Île-de-France. Plus qu'un club, une famille, un état d'esprit et une aventure humaine.",
 };
