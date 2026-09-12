@@ -34,7 +34,9 @@ export const metadata: Metadata = {
   description: SITE.description,
   keywords: SEO_KEYWORDS,
   authors: [{ name: SITE.name }],
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: SITE.url,
+  },
   openGraph: {
     type: "website",
     locale: "fr_FR",
