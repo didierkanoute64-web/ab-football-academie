@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AB Football Académie — Site officiel
 
 Site vitrine premium pour AB Football Académie, construit avec Next.js 15
@@ -156,3 +157,6 @@ refuser", "Personnaliser" et "Tout accepter", stocke le consentement en
 `localStorage`, et peut être rouvert à tout moment via le lien "Gérer mes
 cookies" dans le footer. Aucun cookie non essentiel n'est déposé avant
 consentement explicite.
+=======
+# ab-football-academie
+>>>>>>> c0f5b3ad58100e462f0866aee2a95dd18bf0ef95
