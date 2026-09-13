@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-bebas: "Bebas Neue", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  --cursor-x: 50%;
+  --cursor-y: 50%;
+}
+
+* {
+  scroll-behavior: auto;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background-color: #faf8f3;
+  color: #111111;
+  font-family: var(--font-montserrat);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: #f97316;
+  color: #faf8f3;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #faf8f3;
+}
+::-webkit-scrollbar-thumb {
+  background: #103b2b;
+  border-radius: 999px;
+}
+
+/* Focus visibility for accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #f97316;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Cinematic film grain, applied once via <GrainOverlay /> */
+.grain-layer {
+  position: fixed;
+  inset: -10%;
+  z-index: 9999;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain-layer {
+    display: none;
+  }
+}
+
+@layer utilities {
+  .text-display {
+    font-family: var(--font-bebas);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+
+  .container-ab {
+    @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12;
+  }
+
+  .eyebrow {
+    @apply text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] text-ab-orange;
+  }
+
+  .text-ghost {
+    @apply pointer-events-none select-none text-display leading-none text-transparent;
+    -webkit-text-stroke: 1px currentColor;
+  }
+
+  .stacked-header {
+    @apply text-display leading-[0.82] tracking-tight;
+    font-size: clamp(3.5rem, 11vw, 10rem);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Nike/Adidas-style angled section dividers */
+  .clip-diagonal-down {
+    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+  }
+  .clip-diagonal-up {
+    clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%);
+  }
+  .clip-diagonal-both {
+    clip-path: polygon(0 4%, 100% 0, 100% 96%, 0 100%);
+  }
+
+  .vignette {
+    box-shadow: inset 0 0 18vw 4vw rgba(0, 0, 0, 0.55);
+  }
+
+  .text-outline {
+    -webkit-text-stroke: 1px currentColor;
+    color: transparent;
+  }
+
+  .spotlight {
+    background: radial-gradient(
+      600px circle at var(--cursor-x) var(--cursor-y),
+      rgba(249, 115, 22, 0.15),
+      transparent 40%
+    );
+  }
+}
