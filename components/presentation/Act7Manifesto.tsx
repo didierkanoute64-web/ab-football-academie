@@ -41,13 +41,20 @@ export function Act7Manifesto() {
           </p>
         </RevealOnScroll>
 
-        <div className="mt-8">
+        <div className="mt-8 space-y-1">
           <GsapTextReveal
             as="p"
-            text="Le talent, c'est le travail !"
+            text="Le travail,"
             className="stacked-header inline-block text-ab-cream"
             style={{ fontSize: "clamp(2.75rem, 8vw, 6.5rem)" }}
-            highlightIndices={[0]}
+          />
+          <GsapTextReveal
+            as="p"
+            text="c'est le talent"
+            trigger="scroll"
+            delay={0.12}
+            className="stacked-header inline-block text-ab-orange"
+            style={{ fontSize: "clamp(2.75rem, 8vw, 6.5rem)" }}
           />
         </div>
 

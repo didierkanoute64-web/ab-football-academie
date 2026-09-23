@@ -27,12 +27,13 @@ const config: Config = {
     extend: {
       colors: {
         ab: {
-          orange: "#F97316",
-          "orange-dark": "#DC5F0C",
-          green: "#103B2B",
-          "green-light": "#17513C",
-          cream: "#FAF8F3",
-          black: "#111111",
+          orange: "#FF5A16",
+          "orange-dark": "#F46A22",
+          green: "#032E26",
+          "green-light": "#0C4A3B",
+          "green-deep": "#041B17",
+          cream: "#F4F1E9",
+          black: "#0B0F0E",
         },
       },
       fontFamily: {

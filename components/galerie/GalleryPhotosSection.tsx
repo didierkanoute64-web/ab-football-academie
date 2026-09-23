@@ -22,15 +22,15 @@ export function GalleryPhotosSection() {
   );
 
   return (
-    <section className="bg-ab-cream py-28 lg:py-40">
+    <section className="bg-ab-green-deep py-28 lg:py-40">
       <div className="container-ab">
         <div className="mb-12 flex flex-col gap-6 lg:mb-16 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="eyebrow mb-4">Acte 2</p>
+            <p className="eyebrow mb-4 text-ab-orange">Acte 2</p>
             <GsapTextReveal
               as="h2"
               text="Une galerie éditoriale"
-              className="text-display text-3xl tracking-wide text-ab-black sm:text-4xl lg:text-5xl"
+              className="text-display text-3xl tracking-wide text-ab-cream sm:text-4xl lg:text-5xl"
               highlightIndices={[2]}
             />
           </div>

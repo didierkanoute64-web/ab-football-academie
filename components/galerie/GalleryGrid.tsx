@@ -12,7 +12,7 @@ interface GalleryGridProps {
 export function GalleryGrid({ items, onOpen }: GalleryGridProps) {
   if (items.length === 0) {
     return (
-      <p className="py-24 text-center font-body text-sm text-ab-black/50">
+      <p className="py-24 text-center font-body text-sm text-ab-cream/50">
         Aucune photo dans cette catégorie pour le moment.
       </p>
     );

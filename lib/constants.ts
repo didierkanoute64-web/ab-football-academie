@@ -1,12 +1,11 @@
 export const SITE = {
   name: "AB Football Académie",
-  baseline: "Le talent, c'est le travail !",
+  baseline: "Le travail, c'est le talent !",
   slogan: "Discipline · Travail · Progression · Réussite",
   url:
-process.env.NEXT_PUBLIC_SITE_URL &&
-process.env.NEXT_PUBLIC_SITE_URL.trim() !== ""
-? process.env.NEXT_PUBLIC_SITE_URL
-: "https://ab-football.fr",
+    process.env.NEXT_PUBLIC_SITE_URL && process.env.NEXT_PUBLIC_SITE_URL.trim() !== ""
+      ? process.env.NEXT_PUBLIC_SITE_URL
+      : "https://ab-football.fr",
   description:
     "AB Football Académie accompagne les jeunes talents dans leur développement sportif et humain à Épinay-sur-Seine et en Île-de-France. Plus qu'un club, une famille, un état d'esprit et une aventure humaine.",
 };
@@ -29,6 +28,7 @@ export const NAV_LINKS = [
   { label: "Accueil", href: "/" },
   { label: "Présentation", href: "/presentation" },
   { label: "Galerie", href: "/galerie" },
+  { label: "Blog", href: "/blog" },
 ];
 
 export const FOOTER_LEGAL_LINKS = [
@@ -38,7 +38,7 @@ export const FOOTER_LEGAL_LINKS = [
 
 export const STATS = [
   { value: 120, suffix: "", label: "Jeunes accompagnés" },
-  { value: 4, suffix: "", label: "Éducateurs passionnés" },
+  { value: 6, suffix: "", label: "Éducateurs passionnés" },
   { value: 10, suffix: "", label: "Années d'expérience" },
 ];
 

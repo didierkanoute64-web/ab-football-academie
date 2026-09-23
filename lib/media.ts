@@ -26,10 +26,17 @@ export interface MediaAsset {
   src: string | null;
   /** Texte alternatif obligatoire dès qu'un src est renseigné. */
   alt: string;
+  /**
+   * true = ceci est une illustration générée (pas une vraie photo), utilisée
+   * temporairement en attendant le vrai fichier. Les composants qui
+   * l'affichent DOIVENT le signaler visuellement (voir CoachCard) — jamais
+   * présentée comme une photo authentique du staff.
+   */
+  isIllustration?: boolean;
 }
 
-function asset(alt: string, src: string | null = null): MediaAsset {
-  return { src, alt };
+function asset(alt: string, src: string | null = null, isIllustration?: boolean): MediaAsset {
+  return { src, alt, isIllustration };
 }
 
 export const media = {
@@ -78,10 +85,36 @@ export const media = {
       epanouissement: asset("Groupe de joueurs mains jointes, AB Football Académie"),
     },
     coaches: [
-      asset("Portrait coach principal AB Football Académie"),
-      asset("Portrait coach adjoint — accompagnement sportif"),
-      asset("Portrait coach adjoint — préparation des séances"),
-      asset("Portrait coach adjoint — encadrement des jeunes"),
+      asset(
+        "Illustration provisoire du coach principal AB Football Académie (en attente d'une vraie photo)",
+        "/images/presentation/illustrations/coach-principal.jpg",
+        true
+      ),
+      asset(
+        "Illustration provisoire d'un coach adjoint AB Football Académie (en attente d'une vraie photo)",
+        "/images/presentation/illustrations/coach-adjoint-1.jpg",
+        true
+      ),
+      asset(
+        "Illustration provisoire d'un coach adjoint AB Football Académie (en attente d'une vraie photo)",
+        "/images/presentation/illustrations/coach-adjoint-2.jpg",
+        true
+      ),
+      asset(
+        "Illustration provisoire d'un coach adjoint AB Football Académie (en attente d'une vraie photo)",
+        "/images/presentation/illustrations/coach-adjoint-3.jpg",
+        true
+      ),
+      asset(
+        "Illustration provisoire d'un coach adjoint AB Football Académie (en attente d'une vraie photo)",
+        "/images/presentation/illustrations/coach-adjoint-4.jpg",
+        true
+      ),
+      asset(
+        "Illustration provisoire de la préparatrice sportive AB Football Académie (en attente d'une vraie photo)",
+        "/images/presentation/illustrations/preparatrice.jpg",
+        true
+      ),
     ],
     manifesto: asset(
       "Un éducateur AB Football Académie, concentré pendant une séance",

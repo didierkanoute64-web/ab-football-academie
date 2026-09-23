@@ -41,14 +41,14 @@ export function SeasonTimeline() {
   }, []);
 
   return (
-    <section className="bg-ab-cream py-32 lg:py-40">
+    <section className="bg-ab-black py-32 lg:py-40">
       <div className="container-ab">
         <div className="mb-14 max-w-2xl lg:mb-20">
-          <p className="eyebrow mb-4">Acte 4</p>
+          <p className="eyebrow mb-4 text-ab-orange">Acte 4</p>
           <GsapTextReveal
             as="h2"
             text="Une saison, des souvenirs, une même passion"
-            className="stacked-header text-ab-black"
+            className="stacked-header text-ab-cream"
             style={{ fontSize: "clamp(2.25rem, 5vw, 4rem)" }}
             highlightIndices={[4, 5]}
           />
@@ -89,13 +89,13 @@ export function SeasonTimeline() {
                 }}
                 data-index={i}
                 onMouseEnter={() => setActive(i)}
-                className="border-b border-ab-black/10 py-8 first:border-t lg:py-10"
+                className="border-b border-ab-cream/10 py-8 first:border-t lg:py-10"
               >
                 <div className="flex items-baseline gap-5">
                   <span
                     className={cn(
                       "font-display text-lg transition-colors duration-500",
-                      active === i ? "text-ab-orange" : "text-ab-black/30"
+                      active === i ? "text-ab-orange" : "text-ab-cream/30"
                     )}
                   >
                     {String(i + 1).padStart(2, "0")}
@@ -103,7 +103,7 @@ export function SeasonTimeline() {
                   <p
                     className={cn(
                       "text-display text-3xl tracking-wide transition-colors duration-500 sm:text-4xl",
-                      active === i ? "text-ab-black" : "text-ab-black/30"
+                      active === i ? "text-ab-cream" : "text-ab-cream/30"
                     )}
                   >
                     {step.label}

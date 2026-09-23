@@ -19,15 +19,20 @@ export function FamilySection() {
   const familyPhoto = media.home.family;
 
   return (
-    <section ref={ref} className="w-full">
+    <section id="philosophie" ref={ref} className="relative w-full scroll-mt-20">
       <div className="grid lg:grid-cols-[40%_60%]">
-        <div className="flex items-center bg-ab-green px-6 py-20 sm:px-10 lg:px-14 lg:py-0">
-          <RevealOnScroll>
-            <p className="eyebrow mb-4 text-ab-orange">Notre état d&apos;esprit</p>
+        <div className="relative flex items-center overflow-hidden bg-ab-green-deep px-6 py-20 sm:px-10 lg:px-14 lg:py-0">
+          <span className="text-ghost pointer-events-none absolute -left-10 top-1/2 -translate-y-1/2 select-none text-[26rem] leading-none text-ab-cream opacity-[0.03]">
+            AB
+          </span>
+          <RevealOnScroll className="relative">
+            <p className="eyebrow mb-4 text-ab-orange">Notre philosophie</p>
             <h2 className="text-display text-4xl leading-[0.95] text-ab-cream sm:text-5xl">
-              Plus qu&apos;un club,
+              Bien plus
               <br />
-              une famille !
+              qu&apos;un club,
+              <br />
+              <span className="text-ab-orange">une famille.</span>
             </h2>
             <p className="mt-6 max-w-md font-body text-base text-ab-cream/75">
               À AB Football Académie, nous croyons que le football est un

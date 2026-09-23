@@ -63,7 +63,7 @@ export function Loader() {
             transition={{ delay: 0.3, duration: 0.5 }}
             className="mt-6 text-center font-display text-lg uppercase tracking-[0.15em] text-ab-green sm:text-xl"
           >
-            Le talent, c&apos;est le travail !
+            Le travail, c&apos;est le talent
           </motion.p>
         </motion.div>
       )}

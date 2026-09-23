@@ -75,7 +75,9 @@ export function GalleryHero() {
             transition={{ delay: 1.2, duration: 0.8 }}
             className="mt-6 font-display text-2xl italic tracking-wide text-ab-orange"
           >
-            Le talent, c&apos;est le travail !
+            Le travail,
+            <br />
+            c&apos;est le talent
           </motion.p>
         </div>
       </motion.div>

@@ -35,7 +35,7 @@ export function Act2Philosophy() {
 
       gsap.set(steps, { opacity: 0, y: 32 });
       gsap.set(steps[0], { opacity: 1, y: 0 });
-      gsap.set(dots[0], { backgroundColor: "#F97316", scale: 1.3 });
+      gsap.set(dots[0], { backgroundColor: "#FF5A16", scale: 1.3 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -57,7 +57,7 @@ export function Act2Philosophy() {
           .to(photo, { scale: 1 + i * 0.045, duration: 0.6 }, i - 0.5)
           .to(overlay, { opacity: i % 2 === 0 ? 0.25 : 0.5, duration: 0.6 }, i - 0.5)
           .to(dots[i - 1], { backgroundColor: "rgba(250,248,243,0.3)", scale: 1 }, i - 0.5)
-          .to(dots[i], { backgroundColor: "#F97316", scale: 1.3 }, i - 0.5);
+          .to(dots[i], { backgroundColor: "#FF5A16", scale: 1.3 }, i - 0.5);
       });
 
       return () => {

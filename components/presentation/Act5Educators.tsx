@@ -1,19 +1,26 @@
 "use client";
 
-import { PhotoPlaceholder } from "@/components/ui/photo-placeholder";
 import { GsapTextReveal } from "@/components/animations/GsapTextReveal";
 import { RevealOnScroll, StaggerGroup, StaggerItem } from "@/components/animations/RevealOnScroll";
+import { CoachCard } from "@/components/presentation/CoachCard";
 import { media } from "@/lib/media";
 
-const STAFF = [
-  {
-    role: "Coach principal",
-    focus: ["Direction sportive", "Formation des jeunes", "Suivi global et pédagogique"],
-  },
+const PRINCIPAL = {
+  role: "Coach principal",
+  focus: ["Direction sportive", "Formation des jeunes", "Accompagnement", "Suivi des jeunes"],
+};
+
+const ADJOINTS = [
   { role: "Coach adjoint", focus: ["Accompagnement sportif", "Développement technique"] },
   { role: "Coach adjoint", focus: ["Préparation des séances", "Suivi et progression"] },
   { role: "Coach adjoint", focus: ["Encadrement des jeunes", "Accompagnement individuel"] },
+  { role: "Coach adjoint", focus: ["Suivi individuel", "Accompagnement collectif"] },
 ];
+
+const PREPARATRICE = {
+  role: "Préparatrice sportive",
+  focus: ["Préparation physique", "Prévention des blessures"],
+};
 
 export function Act5Educators() {
   const coaches = media.presentation.coaches;
@@ -23,18 +30,21 @@ export function Act5Educators() {
       <div className="container-ab">
         <RevealOnScroll className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
           <div>
-            <p className="eyebrow mb-4">Nos éducateurs</p>
+            <p className="eyebrow mb-4">Notre équipe</p>
             <GsapTextReveal
               as="h2"
-              text="Transmettre pour faire grandir"
+              text="Ceux qui transmettent"
               className="stacked-header text-ab-black"
               style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)" }}
-              highlightIndices={[2, 3]}
+              highlightIndices={[2]}
             />
+            <p className="mt-4 max-w-md font-body text-base text-ab-black/60">
+              Une équipe engagée au service des jeunes.
+            </p>
           </div>
           <div className="flex gap-10">
             <div>
-              <p className="text-display text-5xl text-ab-green">4</p>
+              <p className="text-display text-5xl text-ab-green">6</p>
               <p className="font-body text-xs uppercase tracking-wide text-ab-black/50">
                 Éducateurs passionnés
               </p>
@@ -48,38 +58,73 @@ export function Act5Educators() {
           </div>
         </RevealOnScroll>
 
-        <StaggerGroup className="mt-16 grid gap-1 sm:grid-cols-2 lg:grid-cols-4">
-          {STAFF.map((member, i) => {
-            const photo = coaches[i];
-            return (
+        <div className="mt-16 space-y-4">
+          {/* Coach principal — carte dominante, 55-60% de largeur */}
+          <RevealOnScroll className="grid gap-4 lg:grid-cols-[58%_42%]">
+            <CoachCard
+              photo={coaches[0] ?? { src: null, alt: "Portrait coach principal" }}
+              role={PRINCIPAL.role}
+              focus={PRINCIPAL.focus}
+              variant="large"
+            />
+            <div className="flex flex-col justify-center bg-ab-green-deep p-8 lg:p-12">
+              <p className="eyebrow mb-4 text-ab-orange">Coach principal</p>
+              <p className="text-display text-3xl leading-tight tracking-wide text-ab-cream lg:text-4xl">
+                Direction sportive &amp; formation des jeunes
+              </p>
+              <ul className="mt-6 space-y-2 font-body text-sm text-ab-cream/70">
+                {PRINCIPAL.focus.map((f) => (
+                  <li key={f} className="flex items-center gap-3">
+                    <span className="h-px w-6 bg-ab-orange" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </RevealOnScroll>
+
+          {/* 4 coachs adjoints — 2 x 2 */}
+          <StaggerGroup className="grid gap-4 sm:grid-cols-2">
+            {ADJOINTS.map((member, i) => (
               <StaggerItem key={i}>
-                <div className="group relative h-[420px] overflow-hidden lg:h-[520px]" data-cursor="voir">
-                  <PhotoPlaceholder
-                    label={photo?.alt ?? `Portrait ${member.role.toLowerCase()}`}
-                    tone="cream"
-                    className="h-full w-full grayscale transition-all duration-700 ease-premium group-hover:scale-105 group-hover:grayscale-0"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ab-black/90 via-ab-black/10 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-90" />
-
-                  <div className="absolute inset-x-0 bottom-0 translate-y-8 p-6 opacity-0 transition-all duration-500 ease-premium group-hover:translate-y-0 group-hover:opacity-100">
-                    <p className="text-display text-2xl tracking-wide text-ab-cream">
-                      {member.role}
-                    </p>
-                    <ul className="mt-2 space-y-0.5 font-body text-xs text-ab-cream/70">
-                      {member.focus.map((f) => (
-                        <li key={f}>{f}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <p className="absolute bottom-6 left-6 font-display text-2xl tracking-wide text-ab-cream transition-opacity duration-300 group-hover:opacity-0">
-                    {member.role}
-                  </p>
-                </div>
+                <CoachCard
+                  photo={coaches[i + 1] ?? { src: null, alt: `Portrait ${member.role.toLowerCase()} ${i + 1}` }}
+                  role={member.role}
+                  focus={member.focus}
+                />
               </StaggerItem>
-            );
-          })}
-        </StaggerGroup>
+            ))}
+          </StaggerGroup>
+
+          {/* Préparatrice sportive — même niveau visuel que le coach principal,
+              structurée en photo + texte pour que le portrait (vertical)
+              conserve une taille lisible plutôt que d'être écrasé dans un
+              format très large et peu adapté à une image portrait. */}
+          <RevealOnScroll className="grid gap-4 lg:grid-cols-[42%_58%]">
+            <div className="order-2 flex flex-col justify-center bg-ab-green-deep p-8 lg:order-1 lg:p-12">
+              <p className="eyebrow mb-4 text-ab-orange">Préparatrice sportive</p>
+              <p className="text-display text-3xl leading-tight tracking-wide text-ab-cream lg:text-4xl">
+                Préparation physique &amp; prévention
+              </p>
+              <ul className="mt-6 space-y-2 font-body text-sm text-ab-cream/70">
+                {PREPARATRICE.focus.map((f) => (
+                  <li key={f} className="flex items-center gap-3">
+                    <span className="h-px w-6 bg-ab-orange" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="order-1 lg:order-2">
+              <CoachCard
+                photo={coaches[5] ?? { src: null, alt: "Portrait préparatrice sportive" }}
+                role={PREPARATRICE.role}
+                focus={PREPARATRICE.focus}
+                variant="large"
+              />
+            </div>
+          </RevealOnScroll>
+        </div>
       </div>
     </section>
   );

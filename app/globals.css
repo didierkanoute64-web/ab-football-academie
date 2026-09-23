@@ -27,26 +27,26 @@ html.lenis body {
 }
 
 body {
-  background-color: #faf8f3;
-  color: #111111;
+  background-color: #041b17;
+  color: #0b0f0e;
   font-family: var(--font-montserrat);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
 ::selection {
-  background-color: #f97316;
-  color: #faf8f3;
+  background-color: #ff5a16;
+  color: #f4f1e9;
 }
 
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #faf8f3;
+  background: #f4f1e9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #103b2b;
+  background: #032e26;
   border-radius: 999px;
 }
 
@@ -55,7 +55,7 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid #f97316;
+  outline: 2px solid #ff5a16;
   outline-offset: 3px;
 }
 

@@ -12,6 +12,8 @@ interface MediaImageProps {
   sizes?: string;
   /** CSS object-position, e.g. "center 20%" — use to avoid cropping a face/action when the container ratio differs from the source photo. */
   objectPosition?: string;
+  /** "cover" (default) fills and crops; "contain" shows the whole image untouched — use for illustrations where nothing may be cropped. */
+  fit?: "cover" | "contain";
 }
 
 /**
@@ -28,6 +30,7 @@ export function MediaImage({
   priority = false,
   sizes = "100vw",
   objectPosition = "center",
+  fit = "cover",
 }: MediaImageProps) {
   if (hasMedia(asset)) {
     return (
@@ -39,7 +42,7 @@ export function MediaImage({
         sizes={sizes}
         quality={82}
         style={{ objectPosition }}
-        className={cn("object-cover", className)}
+        className={cn(fit === "contain" ? "object-contain" : "object-cover", className)}
       />
     );
   }

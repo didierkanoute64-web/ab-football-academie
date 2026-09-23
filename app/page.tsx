@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/home/Hero";
-import { Fundamentals } from "@/components/home/Fundamentals";
 import { StatsSection } from "@/components/home/StatsSection";
 import { FamilySection } from "@/components/home/FamilySection";
-import { BrandShowcase } from "@/components/home/BrandShowcase";
-import { MomentsShowreel } from "@/components/home/MomentsShowreel";
-import { CoachQuote } from "@/components/home/CoachQuote";
+import { Fundamentals } from "@/components/home/Fundamentals";
 import { ImmersionSection } from "@/components/home/ImmersionSection";
+import { CoachQuote } from "@/components/home/CoachQuote";
+import { BlogPreview } from "@/components/home/BlogPreview";
 import { CtaFinal } from "@/components/home/CtaFinal";
 
 export const metadata: Metadata = {
@@ -19,19 +18,15 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      {/* Séquence revue (validation en cours) : Hero → Fondamentaux → Chiffres
-          → Plus qu'un club, en blanc/crème dominant comme la maquette AB. */}
+      {/* 01 Hero · 02 Chiffres · 03 Philosophie · 04 Piliers ·
+          05 Immersion · 06 Mot du coach · 07 Carnet AB · 08 CTA final */}
       <Hero />
-      <Fundamentals />
       <StatsSection />
       <FamilySection />
-      <BrandShowcase />
-
-      {/* Sections pas encore revues dans cette passe — en attente de validation
-          avant de leur appliquer le même traitement clair. */}
-      <MomentsShowreel />
-      <CoachQuote />
+      <Fundamentals />
       <ImmersionSection />
+      <CoachQuote />
+      <BlogPreview />
       <CtaFinal />
     </>
   );
