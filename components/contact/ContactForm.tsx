@@ -12,9 +12,19 @@ type Status = "idle" | "loading" | "success" | "error";
 interface ContactFormProps {
   /** Pré-remplit le message (ex. choix rapide dans le drawer) — non intrusif, reste modifiable. */
   initialMessage?: string;
+  /** Objet de l'e-mail envoyé (champ caché Formspree `_subject`), selon le choix rapide sélectionné. */
+  initialSubject?: string;
+  /** Ref exposée pour permettre au parent (drawer) de placer le focus sur le premier champ. */
+  firstFieldRef?: React.RefObject<HTMLInputElement | null>;
 }
 
-export function ContactForm({ initialMessage = "" }: ContactFormProps) {
+const DEFAULT_SUBJECT = "Nouveau message depuis le site AB Football Académie";
+
+export function ContactForm({
+  initialMessage = "",
+  initialSubject = "",
+  firstFieldRef,
+}: ContactFormProps) {
   const [status, setStatus] = useState<Status>("idle");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -53,11 +63,10 @@ export function ContactForm({ initialMessage = "" }: ContactFormProps) {
       <div className="flex flex-col items-center justify-center rounded-2xl border border-ab-green/20 bg-ab-green/5 px-8 py-16 text-center">
         <CheckCircle2 className="h-12 w-12 text-ab-green" strokeWidth={1.5} />
         <p className="text-display mt-5 text-2xl tracking-wide text-ab-black">
-          Message envoyé !
+          Votre demande a bien été envoyée.
         </p>
         <p className="mt-2 max-w-sm font-body text-sm text-ab-black/60">
-          Merci pour votre message. Notre équipe reviendra vers vous dans les
-          plus brefs délais.
+          Nous vous répondrons dans les meilleurs délais.
         </p>
         <Button variant="outline" className="mt-6" onClick={() => setStatus("idle")}>
           Envoyer un autre message
@@ -68,10 +77,11 @@ export function ContactForm({ initialMessage = "" }: ContactFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      <input type="hidden" name="_subject" value={initialSubject || DEFAULT_SUBJECT} />
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <Label htmlFor="prenom">Prénom</Label>
-          <Input id="prenom" name="prenom" required placeholder="Votre prénom" />
+          <Input id="prenom" name="prenom" required placeholder="Votre prénom" ref={firstFieldRef} />
         </div>
         <div>
           <Label htmlFor="nom">Nom</Label>

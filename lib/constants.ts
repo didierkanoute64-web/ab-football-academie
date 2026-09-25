@@ -18,10 +18,11 @@ export const CONTACT = {
   address: "Stade municipal, Épinay-sur-Seine",
 };
 
+// Identifiants confirmés par l'académie le 25/09/2026 — ne pas modifier sans instruction.
 export const SOCIAL = [
-  { name: "Instagram", href: "https://instagram.com/abfootballacademie" },
-  { name: "WhatsApp", href: "https://wa.me/33782570966" },
-  { name: "TikTok", href: "https://tiktok.com/@abfootballacademie" },
+  { name: "Instagram", href: "https://www.instagram.com/ab_football_academie/" },
+  { name: "WhatsApp", href: "https://wa.me/qr/HJLLH66GHAYKI1" },
+  { name: "TikTok", href: "https://www.tiktok.com/@ab.football938" },
 ];
 
 export const NAV_LINKS = [

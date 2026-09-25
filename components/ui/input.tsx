@@ -8,7 +8,11 @@ const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLI
         type={type}
         ref={ref}
         className={cn(
-          "h-13 w-full rounded-xl border border-ab-black/10 bg-white px-4 py-3 font-body text-sm text-ab-black placeholder:text-ab-black/40 transition-colors duration-200 focus:border-ab-orange focus-visible:outline-none",
+          // text-base (16px) est indispensable sur mobile : en dessous de 16px,
+          // iOS Safari zoome automatiquement la page au focus d'un champ, ce qui
+          // casse la mise en page du drawer et donne l'impression que le
+          // formulaire est "bloqué" après avoir tapé prénom/nom.
+          "h-13 w-full rounded-xl border border-ab-black/10 bg-white px-4 py-3 font-body text-base text-ab-black placeholder:text-ab-black/40 transition-colors duration-200 focus:border-ab-orange focus-visible:outline-none sm:text-sm",
           className
         )}
         {...props}
@@ -26,7 +30,9 @@ const Textarea = React.forwardRef<
     <textarea
       ref={ref}
       className={cn(
-        "w-full rounded-xl border border-ab-black/10 bg-white px-4 py-3 font-body text-sm text-ab-black placeholder:text-ab-black/40 transition-colors duration-200 focus:border-ab-orange focus-visible:outline-none",
+        // Même raison qu'Input ci-dessus : 16px minimum pour empêcher le
+        // zoom automatique iOS au focus.
+        "w-full rounded-xl border border-ab-black/10 bg-white px-4 py-3 font-body text-base text-ab-black placeholder:text-ab-black/40 transition-colors duration-200 focus:border-ab-orange focus-visible:outline-none sm:text-sm",
         className
       )}
       {...props}

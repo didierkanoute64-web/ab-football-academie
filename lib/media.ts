@@ -236,7 +236,6 @@ function video(
 export const gallery: GalleryItem[] = [
   photo("g01", "training", "Opposition à l'entraînement", "Saison 2024-2025", "wide", "Jeunes joueurs AB Football Académie en opposition 4 contre 4 pendant une séance d'entraînement", "/images/gallery/g01.jpg"),
   photo("g02", "training", "Dribble entre les plots", "Saison 2024-2025", "portrait", "Jeune joueur de l'académie en dribble entre des plots à l'entraînement", "/images/gallery/g02.jpg"),
-  photo("g03", "training", "Échange avec l'éducateur", "Saison 2024-2025", "landscape", "Un éducateur AB Football Académie échange avec deux jeunes joueurs sur le terrain", "/images/gallery/g03.jpg"),
   photo("g04", "training", "Concentration avant l'exercice", "Saison 2024-2025", "portrait", "Jeune joueur AB Football Académie, capuche relevée, ballon au pied", "/images/gallery/g04.jpg"),
   photo("g05", "training", "Échauffement collectif", "Saison 2024-2025", "landscape", "Groupe de jeunes joueurs AB Football Académie en sprint pendant l'échauffement", "/images/gallery/g05.jpg"),
   photo("g06", "academy-life", "Concentration", "Saison 2024-2025", "vertical", "Un éducateur AB Football Académie très investi pendant la séance", "/images/gallery/g06.jpg"),

@@ -9,7 +9,6 @@ import { getLenisInstance } from "@/lib/lenis-singleton";
 import { cn } from "@/lib/utils";
 
 const QUICK_REASONS = [
-  { label: "Demander un essai", message: "Bonjour, je souhaiterais demander un essai pour mon enfant. " },
   { label: "Réserver une séance découverte", message: "Bonjour, je souhaiterais réserver une séance découverte. " },
   { label: "Obtenir des renseignements", message: "Bonjour, je souhaiterais obtenir des renseignements sur l'académie. " },
 ];
@@ -26,23 +25,68 @@ const FOCUSABLE_SELECTOR =
 export function ContactDrawer({ isOpen, onClose, triggerRef }: ContactDrawerProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const formSectionRef = useRef<HTMLDivElement>(null);
+  const firstFieldRef = useRef<HTMLInputElement>(null);
   const [selectedReason, setSelectedReason] = useState<string | null>(null);
+  const [selectedSubject, setSelectedSubject] = useState<string>("");
+
+  // Choix rapide : préremplit le sujet/message, fait défiler jusqu'au
+  // formulaire puis place le focus sur le premier champ (Prénom).
+  const handleQuickReason = (reason: { label: string; message: string }) => {
+    setSelectedReason(reason.message);
+    setSelectedSubject(reason.label);
+    requestAnimationFrame(() => {
+      formSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.setTimeout(() => firstFieldRef.current?.focus(), 350);
+    });
+  };
 
   // Body scroll lock + pause Lenis while the drawer is open, restore on close.
+  //
+  // `overflow: hidden` seul ne suffit pas sur iOS Safari : à l'ouverture du
+  // clavier (focus d'un champ du formulaire), iOS fait défiler la page
+  // d'arrière-plan pour "suivre" le champ actif malgré l'overlay, ce qui
+  // décale le drawer et bloque la navigation entre les champs (signalé après
+  // la saisie de prénom/nom). On utilise donc la technique `position: fixed`
+  // + restauration du scroll, qui empêche réellement iOS de bouger la page
+  // sous le drawer.
   useEffect(() => {
     if (!isOpen) {
       setSelectedReason(null);
+      setSelectedSubject("");
       return;
     }
 
     const lenis = getLenisInstance();
     lenis?.stop();
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+
+    const scrollY = window.scrollY;
+    const body = document.body;
+    const previous = {
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      width: body.style.width,
+      overflow: body.style.overflow,
+    };
+
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+    body.style.overflow = "hidden";
 
     return () => {
+      body.style.position = previous.position;
+      body.style.top = previous.top;
+      body.style.left = previous.left;
+      body.style.right = previous.right;
+      body.style.width = previous.width;
+      body.style.overflow = previous.overflow;
+      window.scrollTo(0, scrollY);
       lenis?.start();
-      document.body.style.overflow = previousOverflow;
     };
   }, [isOpen]);
 
@@ -109,7 +153,7 @@ export function ContactDrawer({ isOpen, onClose, triggerRef }: ContactDrawerProp
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-y-0 right-0 flex h-full w-full max-w-full flex-col overflow-y-auto bg-ab-cream sm:max-w-lg"
+            className="absolute inset-y-0 right-0 flex h-full w-full max-w-full flex-col overflow-y-auto overscroll-contain bg-ab-cream [-webkit-overflow-scrolling:touch] sm:max-w-lg"
           >
             <div className="flex items-center justify-between border-b border-ab-black/10 px-6 py-6 sm:px-10">
               <p className="eyebrow">Nous contacter</p>
@@ -152,7 +196,7 @@ export function ContactDrawer({ isOpen, onClose, triggerRef }: ContactDrawerProp
                   <button
                     key={reason.label}
                     type="button"
-                    onClick={() => setSelectedReason(reason.message)}
+                    onClick={() => handleQuickReason(reason)}
                     className={cn(
                       "rounded-full border px-4 py-2 font-body text-xs font-semibold uppercase tracking-wide transition-colors duration-300",
                       selectedReason === reason.message
@@ -171,37 +215,55 @@ export function ContactDrawer({ isOpen, onClose, triggerRef }: ContactDrawerProp
                 transition={{ delay: 0.3, duration: 0.5 }}
                 className="mt-8 space-y-4 border-y border-ab-black/10 py-8 font-body text-sm text-ab-black/80"
               >
-                <li className="flex items-center gap-4">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ab-green/10 text-ab-green">
-                    <Phone className="h-4 w-4" />
-                  </span>
-                  <a href={CONTACT.phoneHref} className="hover:text-ab-orange">
+                <li>
+                  <a
+                    href={CONTACT.phoneHref}
+                    className="flex items-center gap-4 hover:text-ab-orange"
+                  >
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ab-green/10 text-ab-green">
+                      <Phone className="h-4 w-4" />
+                    </span>
                     {CONTACT.phone}
                   </a>
                 </li>
-                <li className="flex items-center gap-4">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ab-green/10 text-ab-green">
-                    <Mail className="h-4 w-4" />
-                  </span>
-                  <a href={`mailto:${CONTACT.email}`} className="hover:text-ab-orange">
+                <li>
+                  <a
+                    href={`mailto:${CONTACT.email}`}
+                    className="flex items-center gap-4 hover:text-ab-orange"
+                  >
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ab-green/10 text-ab-green">
+                      <Mail className="h-4 w-4" />
+                    </span>
                     {CONTACT.email}
                   </a>
                 </li>
-                <li className="flex items-start gap-4">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ab-green/10 text-ab-green">
-                    <MapPin className="h-4 w-4" />
-                  </span>
-                  <span>{CONTACT.address}</span>
+                <li>
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CONTACT.address)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-4 hover:text-ab-orange"
+                  >
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ab-green/10 text-ab-green">
+                      <MapPin className="h-4 w-4" />
+                    </span>
+                    <span>{CONTACT.address}</span>
+                  </a>
                 </li>
               </motion.ul>
 
               <motion.div
+                ref={formSectionRef}
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
                 className="mt-8"
               >
-                <ContactForm initialMessage={selectedReason ?? ""} />
+                <ContactForm
+                  initialMessage={selectedReason ?? ""}
+                  initialSubject={selectedSubject}
+                  firstFieldRef={firstFieldRef}
+                />
               </motion.div>
             </div>
           </motion.div>
